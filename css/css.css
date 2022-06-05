@@ -7,7 +7,7 @@
 }
 :root {
 
-    --base-fontsize: 1.50rem;
+    --base-fontsize: 1.45rem;
 
     --header-scale: 1.25;
 
@@ -41,6 +41,7 @@
         --preformatted: #ccc;
         --disabled: #111;
     }
+
     img,
     video {
         border-radius: 10px;
@@ -52,6 +53,51 @@
 html {
     font-family: Yanone Kaffeesatz;
 }
+/*WRAPPER*/
+.subpart{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    margin-left:  10%;
+    margin-right: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: var(--accent-bg);
+    color: var(--text);
+    box-shadow: 5px 5px 5px var(--text);
+    text-align: left;
+    border-radius: 10px;
+}
+
+.subpart p,h3,label{
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.subpart input,span,textarea,.file{
+    margin-left: 70px;
+    margin-right: 70px;
+}
+
+.modal{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 60rem;
+    margin-left:  auto;
+    margin-right: auto;
+}
+
+.container{
+    width:calc(33% - 10px);
+    height:310px;
+    padding: 5px;
+    padding-bottom: 50px;
+}
+
+.container:hover{
+    opacity: 0.7;
+}
 
 body {
     color: var(--text);
@@ -59,17 +105,12 @@ body {
     font-size: var(--base-fontsize);
     line-height: var(--line-height);
     display: flex;
-    min-height: 100vh;
     flex-direction: column;
-    flex: 1;
     margin: 0 auto;
-    max-width: 60rem;
-    padding: 0 0.5rem;
-    overflow-x: hidden;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
+
+/*ALIGNEMENT*/
 .logo{
     width: 385px;
     height: 154px;
@@ -78,40 +119,47 @@ body {
     margin-right: auto;
     box-shadow: none ;
 }
-.right {
-    float: right;
-    clear:right;
-    height: 25%;
-    width: 25%
-}
-.animateur{
-    display: grid;
-    position: relative;
-    padding:0px;
-    position: relative;
-}
-.animateur h2{
-    margin-top: 10px;
-    margin-right: 40px;
-}
-.subpart{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: var(--accent-bg);
-    color: var(--text);
-    box-shadow: 5px 5px 5px var(--text);
-    text-align: left;
-    border-radius: 25px;
-}
-.subpart p,h3{
-    padding-left: 70px;
-    padding-right: 70px;
-}
-.animateur img{
-    margin-left: 50px;
-    margin-right: 95px;
+
+.container-photo{
+    display: inline-block;
+    vertical-align:top;
 }
 
+.container-photo.right{
+    float: right;
+}
+
+.container-photo.left{
+    float: left;
+}
+
+.name{
+    position:relative;
+    margin:0;
+    margin-top:10px;
+    color: darkslateblue    ;
+}
+.crop{
+    position:relative;
+    margin-left: 30px;
+    margin-right: 30px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.crop img{
+    width: 100%;
+    position:absolute;
+    box-shadow: none;
+}
+
+.activite-img{
+    border-radius: 0;
+    margin:0;
+    margin-top:-11px;
+}
+
+/*GENERALITE*/
 video{
     display: block;
     margin: 0 auto;
@@ -500,50 +548,9 @@ li a:hover {
 #file-chosen{
     margin-left: 0.3rem;
 }
-/*Affichage des activitees, etc*/
-.container{
-    display: grid;
-    position: relative;
-}
 
-.container:hover{
-    opacity: 0.7;
-}
 
-.Up, .Down{
-    top: 0;
-    left: 0;
-    grid-column: 1;
-    grid-row: 1;
-    position: absolute;
-}
-.Down{
-    border-radius: 10px 10px 0 0 ;
-    margin-top: 0;
-}
-.Up{
-    margin-top: 150px;
-    border-radius: 0 0 10px 10px;
-}
-
-.imageFull{
-    position:relative;
-    width:750px;
-    margin-top: 30px;
-    height:200px;
-    margin-left: 30px;
-    margin-right: 30px;
-    overflow: hidden;
-    border-radius: 10px;
-    background-color:white; 
-}
-
-.imageFull img{
-    position:absolute;
-    border-radius: 0;
-    box-shadow: none;
-}
-
+/*POPUP ACTIVITE*/
 .bg-modal {
     align-items: center;
     display: none;
@@ -556,19 +563,21 @@ li a:hover {
     z-index: 5000;
 }
 
-.modal{
-    justify-content: space-between;
-    display : inline;
-    position:absolute;
-    margin-left: 20%;
-    margin-right: 20%;
-}
+
 
 .close{
-    position:absolute;
-    top: 0;
-    right: 14px;
+    float: right;
+    position:relative;
+    bottom: 30px;
+    right: 5px;
     font-size: 42px;
     transform: rotate(45deg);
     cursor: pointer;
+    border-radius: 50px;
+}
+
+/*FORMULAIRE*/
+.horaire{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
