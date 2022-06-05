@@ -22,23 +22,32 @@ function login($mdp, $login) {
         session_id();
         echo '<meta http-equiv="refresh" content="1; url=index.php"/>';
     } else {
-        echo '<h1>Login ou Mot de passe incorrect</h1>';
+        echo '<script>alert("Login ou Mot de passe.");</script>';
     }
 }
 
 //All Gets
 function getActivites() {
     $connexion = connect();
-    $requete = "SELECT activites.idActivites,titre,description,imgName,altImg FROM activites INNER JOIN imageactivite ON activites.idActivites = imageactivite.idActivites";
+    $requete = "SELECT activites.idActivites,titre,description,imgName FROM activites INNER JOIN imageactivite ON activites.idActivites = imageactivite.idActivites";
     $query = $connexion->prepare($requete);
     $execute = $query->execute();
     $LesActivites = $query->fetchAll();
     return $LesActivites;
 }
 
+function getLesEvent() {
+    $connexion = connect();
+    $requete = "SELECT evenements.idEvent,titre,description,addresse,date,horaires,imgName FROM evenements INNER JOIN imageevent ON evenements.idEvent = imageevent.idEvent";
+    $query = $connexion->prepare($requete);
+    $execute = $query->execute();
+    $LesEvent = $query->fetchAll();
+    return $LesEvent;
+}
+
 function getDetailAct($id) {
     $connexion = connect();
-    $requete = "SELECT activites.idActivites,titre,description,imgName,altImg FROM activites INNER JOIN imageactivite ON activites.idActivites = imageactivite.idActivites WHERE activites.idActivites = :id";
+    $requete = "SELECT activites.idActivites,titre,description,imgName FROM activites INNER JOIN imageactivite ON activites.idActivites = imageactivite.idActivites WHERE activites.idActivites = :id";
     $query = $connexion->prepare($requete);
     $query->bindValue(':id', $id, PDO::PARAM_INT);
     $execute = $query->execute();
@@ -54,41 +63,53 @@ function getAnim() {
     $LesAnimateurs = $query->fetchAll();
     return $LesAnimateurs;
 }
+function getCloseEvent(){
+    $connexion = connect();
+    $requete = "SELECT evenements.idEvent,titre,description,addresse,date,horaires,imgName FROM evenements INNER JOIN imageevent ON evenements.idEvent = imageevent.idEvent ORDER BY ABS(date - CURRENT_DATE()) ASC LIMIT 1;";
+    $query = $connexion->prepare($requete);
+    $query->execute();
+    $newEvent= $query->fetch();
+    return $newEvent;
+}
 
 //All Add
-function addActivites($titre, $description) {
+function addActivites($titre, $description, $filename) {
     $connexion = connect();
-    $query = $connexion->prepare('INSERT INTO activites(titre,description) VALUES(:titre,:description)');
+    $query = $connexion->prepare('INSERT INTO activites(titre,description) VALUES(:titre,:description);');
     $query->bindValue(':titre', $titre, PDO::PARAM_STR);
     $query->bindValue(':description', $description, PDO::PARAM_STR);
     $execute = $query->execute();
-    if ($execute) {
-        echo "<div class='subpart'><h2>L'activitée à été créée</h2></div><br>";
+    $query2 = $connexion->prepare('INSERT INTO imageactivite(imgName,idActivites) VALUES(:imgName ,(SELECT MAX(idActivites) FROM activites));');
+    $query2->bindValue(':imgName', $filename, PDO::PARAM_STR);
+    $execute2 = $query2->execute();
+    if ($execute && $execute2) {
+        echo '<script>alert("Activitée crée avec succès.");</script>';
     } else {
-        echo "<h2> /!\ Erreur sur le titre ou la description </h2>";
+        echo '<script>alert("Erreur Interne.");</script>';
     }
 }
 
-function addImgActivites($titre, $description, $filename, $altname) {
+function addEvent($titre, $date, $horaires, $addresse, $description, $filename) {
     $connexion = connect();
-    //Requete sur l'id
-    $getId = $connexion->prepare('SELECT idActivites FROM activites WHERE titre = :titre AND description = :description');
-    $getId->bindValue(':titre', $titre, PDO::PARAM_STR);
-    $getId->bindValue(':description', $description, PDO::PARAM_STR);
-    $getId->execute();
-    $id = $getId->fetch();
-    //Requete Principale
-    $query = $connexion->prepare('INSERT INTO imageactivite(imgName,altImg,idActivites) VALUES(:filename,:altname,:id)');
-    $query->bindValue(':id', $id['idActivites'], PDO::PARAM_INT);
-    $query->bindValue(':filename', $filename, PDO::PARAM_STR);
-    $query->bindValue(':altname', $altname, PDO::PARAM_STR);
+    $query = $connexion->prepare('INSERT INTO evenements(titre,description,date,addresse,horaires) VALUES(:titre,:description,:date,:addresse,:horaires)');
+    $query->bindValue(':titre', $titre, PDO::PARAM_STR);
+    $query->bindValue(':description', $description, PDO::PARAM_STR);
+    $query->bindValue(':date', $date, PDO::PARAM_STR);
+    $query->bindValue(':horaires', $horaires, PDO::PARAM_STR);
+    $query->bindValue(':addresse', $addresse, PDO::PARAM_STR);
     $execute = $query->execute();
-    if (!$execute) {
-        echo "<div class='subpart'><h2> /!\ Erreur sur l'image </h2></div><br>";
+    $query2 = $connexion->prepare('INSERT INTO imageevent(imgName,idEvent) VALUES(:imgName ,(SELECT MAX(idEvent) FROM evenement));');
+    $query2->bindValue(':imgName', $filename, PDO::PARAM_STR);
+    $execute2 = $query2->execute();
+    if ($execute && $execute2) {
+        echo '<script>alert("Évenement crée avec succès.");</script>';
+    } else {
+        echo '<script>alert("Erreur Interne.");</script>';
     }
 }
 
-function addAnimateur($nom,$prenom,$description,$filename) {
+
+function addAnimateur($nom, $prenom, $description, $filename) {
     $connexion = connect();
     $query = $connexion->prepare('INSERT INTO animateurs(nom,prenom,description,imgAnim) VALUES(:nom,:prenom,:description,:img)');
     $query->bindValue(':nom', $nom, PDO::PARAM_STR);
@@ -97,8 +118,8 @@ function addAnimateur($nom,$prenom,$description,$filename) {
     $query->bindValue(':img', $filename, PDO::PARAM_STR);
     $execute = $query->execute();
     if ($execute) {
-        echo "<div class='subpart'><h2>L'animateur à été ajouté</h2></div><br>";
+        echo '<script>alert("Animateur crée avec succès.");</script>';
     } else {
-        echo "<h2> /!\ Erreur </h2>";
+        echo '<script>alert("Erreur Interne.");</script>';
     }
 }
