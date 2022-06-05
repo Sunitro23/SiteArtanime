@@ -9,11 +9,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 ?>
 <div class="subpart">
 <form action="#" method="post">
-    <p><label for="username">Entrez votre nom d'utilisateur :</label></p>
+    <label for="username">Entrez votre nom d'utilisateur :</label>
     <input type="text" name="username" id="username" required><br>
-    <p><label for="password">Entrez votre mot de passe :</label></p>
+    <label for="password">Entrez votre mot de passe :</label>
     <input type="password" name="password" id="password"><br>
-    <input type="submit" value="Se connecter">
+    <div class="file"><input type="submit" value="Se connecter"></div>
 </form>
 </div>
 <?php include_once 'inc/footer.inc';
