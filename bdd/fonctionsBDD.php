@@ -57,18 +57,28 @@ function getDetailAct($id) {
 
 function getAnim() {
     $connexion = connect();
-    $requete = "SELECT nom,prenom,description,imgAnim FROM animateurs";
+    $requete = "SELECT nom,prenom,description,imgAnim,idAnim FROM animateurs";
     $query = $connexion->prepare($requete);
     $execute = $query->execute();
     $LesAnimateurs = $query->fetchAll();
     return $LesAnimateurs;
 }
-function getCloseEvent(){
+
+function getCA() {
+    $connexion = connect();
+    $requete = "SELECT * FROM conseiladmin";
+    $query = $connexion->prepare($requete);
+    $execute = $query->execute();
+    $LeCA = $query->fetchAll();
+    return $LeCA;
+}
+
+function getCloseEvent() {
     $connexion = connect();
     $requete = "SELECT evenements.idEvent,titre,description,addresse,date,horaires,imgName FROM evenements INNER JOIN imageevent ON evenements.idEvent = imageevent.idEvent ORDER BY ABS(date - CURRENT_DATE()) ASC LIMIT 1;";
     $query = $connexion->prepare($requete);
     $query->execute();
-    $newEvent= $query->fetch();
+    $newEvent = $query->fetch();
     return $newEvent;
 }
 
@@ -98,7 +108,7 @@ function addEvent($titre, $date, $horaires, $addresse, $description, $filename) 
     $query->bindValue(':horaires', $horaires, PDO::PARAM_STR);
     $query->bindValue(':addresse', $addresse, PDO::PARAM_STR);
     $execute = $query->execute();
-    $query2 = $connexion->prepare('INSERT INTO imageevent(imgName,idEvent) VALUES(:imgName ,(SELECT MAX(idEvent) FROM evenement));');
+    $query2 = $connexion->prepare('INSERT INTO imageevent(imgName,idEvent) VALUES(:imgName ,(SELECT MAX(idEvent) FROM evenements));');
     $query2->bindValue(':imgName', $filename, PDO::PARAM_STR);
     $execute2 = $query2->execute();
     if ($execute && $execute2) {
@@ -107,7 +117,6 @@ function addEvent($titre, $date, $horaires, $addresse, $description, $filename) 
         echo '<script>alert("Erreur Interne.");</script>';
     }
 }
-
 
 function addAnimateur($nom, $prenom, $description, $filename) {
     $connexion = connect();
@@ -119,6 +128,81 @@ function addAnimateur($nom, $prenom, $description, $filename) {
     $execute = $query->execute();
     if ($execute) {
         echo '<script>alert("Animateur crée avec succès.");</script>';
+    } else {
+        echo '<script>alert("Erreur Interne.");</script>';
+    }
+}
+
+function addCA($nom, $prenom, $fonction, $filename) {
+    $connexion = connect();
+    $query = $connexion->prepare('INSERT INTO conseiladmin(nom,prenom,imgCA,fonction) VALUES(:nom,:prenom,:img,:fonction)');
+    $query->bindValue(':nom', $nom, PDO::PARAM_STR);
+    $query->bindValue(':prenom', $prenom, PDO::PARAM_STR);
+    $query->bindValue(':fonction', $fonction, PDO::PARAM_STR);
+    $query->bindValue(':img', $filename, PDO::PARAM_STR);
+    $execute = $query->execute();
+    if ($execute) {
+        echo '<script>alert("Membre du CA crée avec succès.");</script>';
+    } else {
+        echo '<script>alert("Erreur Interne.");</script>';
+    }
+}
+
+//All Dels
+
+function delActivite($id) {
+    $connexion = connect();
+    $requete = "DELETE FROM activites WHERE idActivites = :id;";
+    $query = $connexion->prepare($requete);
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $execute = $query->execute();
+    $query2 = $connexion->prepare("DELETE FROM imageactivite WHERE idActivites = :id;");
+    $query2->bindValue(':id', $id, PDO::PARAM_STR);
+    $execute2 = $query2->execute();
+    if ($execute & $execute2) {
+        echo '<script>alert("Supprimé avec succès");</script>';
+    } else {
+        echo '<script>alert("Erreur Interne.");</script>';
+    }
+}
+
+function delEvent($id) {
+    $connexion = connect();
+    $requete = "DELETE FROM evenements WHERE idEvent = :id;";
+    $query = $connexion->prepare($requete);
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $execute = $query->execute();
+    $query2 = $connexion->prepare("DELETE FROM imageevent WHERE idEvent = :id;");
+    $query2->bindValue(':id', $id, PDO::PARAM_STR);
+    $execute2 = $query2->execute();
+    if ($execute & $execute2) {
+        echo '<script>alert("Supprimé avec succès");</script>';
+    } else {
+        echo '<script>alert("Erreur Interne.");</script>';
+    }
+}
+
+function delAnim($id) {
+    $connexion = connect();
+    $requete = "DELETE FROM animateurs WHERE idAnim = :id ;";
+    $query = $connexion->prepare($requete);
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $execute = $query->execute();
+    if ($execute) {
+        echo '<script>alert("Supprimé avec succès");</script>';
+    } else {
+        echo '<script>alert("Erreur Interne.");</script>';
+    }
+}
+
+function delCA($id) {
+    $connexion = connect();
+    $requete = "DELETE FROM conseiladmin WHERE idCA = :id ;";
+    $query = $connexion->prepare($requete);
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $execute = $query->execute();
+    if ($execute) {
+        echo '<script>alert("Supprimé avec succès");</script>';
     } else {
         echo '<script>alert("Erreur Interne.");</script>';
     }
