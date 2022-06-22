@@ -17,6 +17,9 @@
             <span id="file-chosen">Aucune image choisie </span>
         </div><br>
 
+        <label for="color">Couleur :</label><br>
+        <input id="color" name="color" type="color">
+
         <div class="file"><input type="submit" value="Valider"></div>
 
     </form>
@@ -70,6 +73,7 @@ if (isset($_POST['titre']) && isset($_POST['description']) && isset($_FILES['fic
                         'jpg' => 'image/jpeg',
                         'png' => 'image/png',
                         'gif' => 'image/gif',
+                        'webp'=> 'image/webp',
                     ),
                     true
                     )) {
@@ -85,7 +89,8 @@ if (isset($_POST['titre']) && isset($_POST['description']) && isset($_FILES['fic
 
             $titre = $_POST['titre'];
             $description = $_POST['description'];
-            addActivites($titre, $description,$filename);
+            $color = $_POST['color'];
+            addActivites($titre, $description, $filename,$color);
         }
     } catch (RuntimeException $e) {
         echo '<script>alert("' . $e->getMessage() . '");</script>';

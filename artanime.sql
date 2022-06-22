@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 05 juin 2022 à 17:03
+-- Généré le : mer. 22 juin 2022 à 12:45
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -34,19 +34,16 @@ CREATE TABLE IF NOT EXISTS `activites` (
   `idActivites` int(11) NOT NULL AUTO_INCREMENT,
   `titre` varchar(30) NOT NULL,
   `description` varchar(4000) NOT NULL,
+  `color` varchar(20) NOT NULL,
   PRIMARY KEY (`idActivites`)
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `activites`
 --
 
-INSERT INTO `activites` (`idActivites`, `titre`, `description`) VALUES
-(80, 'Éveil à la danse', 'Dans une dimension ludique et artistique, donc créative et imaginaire, il s’agit de faire découvrir aux\r\nenfants l’infinie variété de mouvements, de leur permettre de devenir libre et riche dans leur langage\r\ncorporel. L’éveil, c’est aussi un éveil musical au sens de la découverte de différents styles de musique, au\r\nsens de l’écoute et de la traduction corporelle des paramètres de la musique.'),
-(93, 'Grinch', 'AAAAAAAAAAAA'),
-(94, 'q', 'ARDQDSS'),
-(95, 'A', 'A'),
-(96, 'A', 'A');
+INSERT INTO `activites` (`idActivites`, `titre`, `description`, `color`) VALUES
+(12, 'Eveil à la danse', 'Eveil a la danse', '#9ef4ff');
 
 -- --------------------------------------------------------
 
@@ -81,16 +78,16 @@ CREATE TABLE IF NOT EXISTS `animateurs` (
   `description` varchar(2500) NOT NULL,
   `imgAnim` varchar(30) NOT NULL,
   PRIMARY KEY (`idAnim`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `animateurs`
 --
 
 INSERT INTO `animateurs` (`idAnim`, `nom`, `prenom`, `description`, `imgAnim`) VALUES
-(1, 'Nowak', 'Adrien', 'Bonjour à tous, avec moi, vous apprendrez les bases du piano et comment savoir lire une partition rapidement (vous verrez c\'est très facile !).\r\n\r\nDans un cours d\'une heure par semaine, nous mêleront donc piano et solfège pour que l\'apprentissage soit plus intéressant. Débutant ou amateur en solfège, tout le monde est accepté ! Nous apprendrons aussi comment accompagner des chansons et déchiffrer des accords ! Bref, curieux du piano, vous êtes les bienvenus.\r\n', 'AndreAnim.webp'),
 (2, 'ELYN', 'Christiane', 'Le Pilates est pratiquée au tapis avec ou sans accessoires ou à l\'aide d\'appareils. Elle a pour objectif le développement des muscles profonds, l\'amélioration de la posture, l\'équilibrage musculaire et l\'assouplissement articulaire, pour un entretien, une amélioration ou une restauration des fonctions physiques.', 'ELYN.webp'),
-(3, 'DJAFOUR', 'Houda', 'Houda , animatrice de danse orientale Et berbère depuis 10 ans.\r\nLa danse orientale est un art qui allie sensualité grâce et technique sur des rythmes du moyen et proche orient.. Les musiques peuvent-être lentes ou très rythmées. . modernes ou traditionnelles comme Le. baladi ou le sharky par exemple .Elle attire pour son côté magique des milles et une nuit. Nous souhaiterions développer dans nos cours les étapes d\'apprentissage suivantes : découvertes et exercices de rythme, découverte et apprentissage des bases de la danse orientale (rond orientaux, le sharky, le tremblement, le twist ….)\r\n\r\nEn fonction de leur niveau de danse les élèves pourront apprendre à manier des accessoires : voiles, foulards, cannes, éventail, aile d\'Isis, tambourin etc... Les élèves auront l\'occasion de préparer une chorégraphie qui sera le fruit de leur travail ..La danse est aussi un loisir c\'est pourquoi les élèves auront l\'opportunité de donner leurs idées et d\'exprimer leur imagination.', 'HoudaDJAFOUR.webp');
+(3, 'DJAFOUR', 'Houda', 'Houda , animatrice de danse orientale Et berbère depuis 10 ans.\r\nLa danse orientale est un art qui allie sensualité grâce et technique sur des rythmes du moyen et proche orient.. Les musiques peuvent-être lentes ou très rythmées. . modernes ou traditionnelles comme Le. baladi ou le sharky par exemple .Elle attire pour son côté magique des milles et une nuit. Nous souhaiterions développer dans nos cours les étapes d\'apprentissage suivantes : découvertes et exercices de rythme, découverte et apprentissage des bases de la danse orientale (rond orientaux, le sharky, le tremblement, le twist ….)\r\n\r\nEn fonction de leur niveau de danse les élèves pourront apprendre à manier des accessoires : voiles, foulards, cannes, éventail, aile d\'Isis, tambourin etc... Les élèves auront l\'occasion de préparer une chorégraphie qui sera le fruit de leur travail ..La danse est aussi un loisir c\'est pourquoi les élèves auront l\'opportunité de donner leurs idées et d\'exprimer leur imagination.', 'HoudaDJAFOUR.webp'),
+(4, 'NOWAK', 'Adrien', 'Bonjour à tous, avec moi, vous apprendrez les bases du piano et comment savoir lire une partition rapidement (vous verrez c\'est très facile !). Dans un cours d\'une heure par semaine, nous mêleront donc piano et solfège pour que l\'apprentissage soit plus intéressant. Débutant ou amateur en solfège, tout le monde est accepté ! Nous apprendrons aussi comment accompagner des chansons et déchiffrer des accords ! Bref, curieux du piano, vous êtes les bienvenus.', 'AndreAnim.webp');
 
 -- --------------------------------------------------------
 
@@ -103,11 +100,22 @@ CREATE TABLE IF NOT EXISTS `conseiladmin` (
   `idCA` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(30) NOT NULL,
   `prenom` varchar(30) NOT NULL,
-  `description` varchar(2500) NOT NULL,
   `imgCA` varchar(30) NOT NULL,
   `fonction` varchar(30) NOT NULL,
   PRIMARY KEY (`idCA`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `conseiladmin`
+--
+
+INSERT INTO `conseiladmin` (`idCA`, `nom`, `prenom`, `imgCA`, `fonction`) VALUES
+(2, 'NOWAK', 'André', 'ANDRE.png', 'Président'),
+(3, 'CALVANUS', 'Myriam', 'CALVANUS.webp', 'Trésorière'),
+(4, 'HYZARD', 'Claudine', 'HYZARD.webp', 'Trésorière Adjointe'),
+(6, 'SULMON', 'Stéphane', 'SULMON.webp', 'Administrateur'),
+(7, 'LEFEBVRE', 'Julie', 'JLEFEBVRE.webp', 'Administratrice'),
+(8, 'GAILLET', 'Thomas', 'GAILLET.webp', 'Administrateur');
 
 -- --------------------------------------------------------
 
@@ -118,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `conseiladmin` (
 DROP TABLE IF EXISTS `cours`;
 CREATE TABLE IF NOT EXISTS `cours` (
   `idCours` int(11) NOT NULL AUTO_INCREMENT,
-  `date` date NOT NULL,
+  `jour` int(11) NOT NULL,
   `heureDebut` int(11) NOT NULL,
   `heureFin` int(11) NOT NULL,
   `idActivites` int(11) NOT NULL,
@@ -128,7 +136,14 @@ CREATE TABLE IF NOT EXISTS `cours` (
   PRIMARY KEY (`idCours`),
   KEY `idActivites` (`idActivites`),
   KEY `idAnim` (`idAnim`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `cours`
+--
+
+INSERT INTO `cours` (`idCours`, `jour`, `heureDebut`, `heureFin`, `idActivites`, `idAnim`, `addresse`, `niveau`) VALUES
+(1, 1, 12, 15, 12, 2, 'Rue des Sans Abris', 'Enfant');
 
 -- --------------------------------------------------------
 
@@ -145,14 +160,14 @@ CREATE TABLE IF NOT EXISTS `evenements` (
   `addresse` varchar(60) NOT NULL,
   `horaires` varchar(25) NOT NULL,
   PRIMARY KEY (`idEvent`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `evenements`
 --
 
 INSERT INTO `evenements` (`idEvent`, `titre`, `description`, `date`, `addresse`, `horaires`) VALUES
-(1, 'ZUMBA PARTY', 'FLUO', '2022-06-10', 'Salle Kerkhove Leers', 'à partir de 19h');
+(10, 'ZUMBA PARTY', 'Ambiance Fluo.', '2019-10-11', 'Salle Kerkhove Leers', '19h à 22h');
 
 -- --------------------------------------------------------
 
@@ -167,18 +182,14 @@ CREATE TABLE IF NOT EXISTS `imageactivite` (
   `idActivites` int(11) NOT NULL,
   PRIMARY KEY (`idImgA`),
   KEY `idActivites` (`idActivites`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `imageactivite`
 --
 
 INSERT INTO `imageactivite` (`idImgA`, `imgName`, `idActivites`) VALUES
-(62, 'EveilDanse.webp', 80),
-(68, 'Grinch.png', 93),
-(69, 'Hmmm.png', 94),
-(70, 'Grinch.png', 95),
-(71, 'Grinch.png', 96);
+(12, 'eveildanse.webp', 12);
 
 -- --------------------------------------------------------
 
@@ -193,14 +204,14 @@ CREATE TABLE IF NOT EXISTS `imageevent` (
   `idEvent` int(11) NOT NULL,
   PRIMARY KEY (`idImgE`),
   KEY `idEvent` (`idEvent`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `imageevent`
 --
 
 INSERT INTO `imageevent` (`idImgE`, `imgName`, `idEvent`) VALUES
-(1, 'Zumba.webp', 1);
+(8, 'zumbapart.webp', 10);
 
 --
 -- Contraintes pour les tables déchargées

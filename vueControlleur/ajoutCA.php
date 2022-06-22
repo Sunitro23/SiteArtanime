@@ -1,33 +1,29 @@
 <?php include_once '../inc/header.inc'; ?>
-
 <div class="subpart">
-    <h2>Ajouter un Évenement</h2>
+
+    <h2>Ajouter un membre du CA</h2>
+
     <form action="#" method="post" enctype="multipart/form-data">
 
-        <label for="titre"> Titre : </label><br>
-        <input type="text" id="titre" name="titre" maxlength="30"><br>
+        <label for="nom"> Nom : </label><br>
+        <input type="text" id="nom" name="nom" maxlength="30"><br>
 
-        <label for="date"> Date : </label><br>
-        <input id="date" name="date" type="date"><br>
+        <label for="prenom"> Prénom : </label><br>
+        <input type="text" id="prenom" name="prenom" maxlength="30"><br>
 
-        <label for="horaires"> Horaires : </label><br>
-        <p>De <input type="text" id="horaireH" name="horaireH" maxlength="2" style="width: 50px;" class="horaire"> h à <input type="text" id="horaireM" name="horaireM" maxlength="2" style="width: 50px;" class="horaire"> h</p>
-
-        <label for="addresse"> Addresse : </label><br>
-        <input type="addresse" id="addresse" name="addresse" maxlength="60"><br>
-
-        <label for="decription"> Description : </label><br>
-        <textarea id="description" name="description" rows="5" cols="33" maxlength="4000"></textarea><br>
+        <label for="fonction"> Fonction : </label><br>
+        <input type="text" id="fonction" name="fonction" maxlength="30"><br>
 
         <div class="file">
             <label for='actual-btn' class='label'> Choisir l'image : </label>
             <input type="file" name="fichier" id="actual-btn" hidden/>
-            <span id="file-chosen">Aucune image choisie </span>
-        </div><br>
+            <span id="file-chosen">Aucune image choisie </span><br>
+        </div>
 
         <div class="file"><input type="submit" value="Valider"></div>
 
     </form>
+
 </div>
 
 <script>
@@ -41,11 +37,11 @@
 <?php
 include_once '../bdd/fonctionsBDD.php';
 
-if (isset($_POST['titre']) && isset($_POST['date']) && isset($_POST['horaireH']) && isset($_POST['addresse']) && isset($_POST['description']) && isset($_FILES['fichier'])) {
+if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['fonction']) && isset($_FILES['fichier'])) {
 
     try {
 
-        if (empty($_POST['titre']) || empty($_POST['date']) || empty($_POST['horaireH']) || empty($_POST['addresse']) || empty($_POST['description'])) {
+        if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['fonction'])) {
 
             throw new RuntimeException('Veuillez remplir toutes les valeurs.');
         } else {
@@ -75,7 +71,7 @@ if (isset($_POST['titre']) && isset($_POST['date']) && isset($_POST['horaireH'])
                         'jpg' => 'image/jpeg',
                         'png' => 'image/png',
                         'gif' => 'image/gif',
-                        'webp'=> 'image/webp',
+                        'webp' =>'image/webp',
                     ),
                     true
                     )) {
@@ -84,23 +80,18 @@ if (isset($_POST['titre']) && isset($_POST['date']) && isset($_POST['horaireH'])
 
             $filename = $_FILES["fichier"]["name"];
             $tempname = $_FILES["fichier"]["tmp_name"];
-            $folder = "C://wamp64/www/SiteArtanime/img/event/" . $filename;
+            $folder = "C://wamp64/www/SiteArtanime/img/ca/" . $filename;
             move_uploaded_file($tempname, $folder);
 
-//Ajout BDD
+//Ajout dans la BDD
 
-            $titre = $_POST['titre'];
-            $date = $_POST['date'];
-            if ($_POST['horaireM'] == null) {
-                $horaires = 'à partir de ' . $_POST['horaireH'] . 'h';
-            } else {
-                $horaires = $_POST['horaireH'] . 'h à ' . $_POST['horaireM'] . 'h';
-            }
-            $addresse = $_POST['addresse'];
-            $description = $_POST['description'];
-            addEvent($titre, $date, $horaires, $addresse, $description, $filename);
+            $nom = $_POST['nom'];
+            $prenom = $_POST['prenom'];
+            $fonction = $_POST['fonction'];
+            addCA($nom, $prenom, $fonction, $filename);
         }
     } catch (RuntimeException $e) {
         echo '<script>alert("' . $e->getMessage() . '");</script>';
     }
 }
+

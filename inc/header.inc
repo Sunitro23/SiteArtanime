@@ -12,11 +12,17 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <?php echo '<link href="' . SCRIPT_ROOT . '/css/css.css" rel="stylesheet">'; ?>
-
     </head>
 
-    <header>
+    <header class="responsive_headline">
+
+        <?php echo '<link href="' . SCRIPT_ROOT . '/css/css.css" rel="stylesheet">'; ?>
+
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css'>
+
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>        
 
         <div class="menu">
 
@@ -57,5 +63,6 @@
 
         <div class='wrapper'>
 
-<?php
-echo '<img class = "logo" src = "' . SCRIPT_ROOT . '/img/artanimelogo.png" alt = "artanime">';
+            <?php
+            echo '<img class = "logo" src = "' . SCRIPT_ROOT . '/img/artanimelogo.png" alt = "artanime">';
+            
