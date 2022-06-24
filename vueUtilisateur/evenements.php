@@ -6,7 +6,7 @@ if (isset($_POST['delid']) && !empty($_POST['delid'])) {
 }
 ?>
 
-<div class='subpart'><h2>Quels sont nos activités ?</h2></div><br>
+<div class='subpart'><h2>Quels sont nos évenements ?</h2></div><br>
 
 <div class="subpart transparent-container " id="event-flex">
 
@@ -24,7 +24,7 @@ if (isset($_POST['delid']) && !empty($_POST['delid'])) {
         
         <h1 style="text-align: left;color:var(--text-light);">' . $UnEvent['titre'] . '</h1>
                 
-        <p>' . $UnEvent['description'] . '<br>' . $UnEvent['addresse'] . '<br>' . date($UnEvent['date']) . ' ' . $UnEvent['horaires'] . '</p>';
+        <p>' . $UnEvent['description'] . '<br>' . $UnEvent['addresse'] . '<br>' . date($UnEvent['date']) . ' <br> ' . $UnEvent['horaires'] . '</p>';
         if (isset($_SESSION['login'])) {
             echo '
             <form id="del' . $UnEvent["idEvent"] . '" name="del' . $UnEvent["idEvent"] . '" method="POST">
@@ -50,3 +50,5 @@ if (isset($_POST['delid']) && !empty($_POST['delid'])) {
         window.history.replaceState(null, null, window.location.href);
     }
 </script>
+<?php
+include_once '../inc/footer.inc';

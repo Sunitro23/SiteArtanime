@@ -25,10 +25,10 @@ if (isset($_POST['delidAnim']) && !empty($_POST['delidAnim'])) {
         if ($UnCA['fonction'] == "Président") {
             echo'<div class="container-photo" style="margin-left:auto;margin-right:auto;display: block;padding-top:15px;">';
         } else {
-            echo'<div class="container container-photo" style="width:calc(50% - 10px);height:auto;margin:0;padding-bottom:15px;">';
+            echo'<div class="container container-photo" id="CA-container">';
         }
 
-        echo '<div style="height:200px; width:200px;margin-left:auto;margin-right:auto;position:relative;overflow: hidden; border-radius: 10px;">';
+        echo '<div id="CA">';
 
         //ICONE SUPPRIMER CA
 

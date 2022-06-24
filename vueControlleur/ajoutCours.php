@@ -15,10 +15,11 @@ include '../bdd/fonctionsBDD.php';
             <option value="4">Jeudi</option>
             <option value="5">Vendredi</option>
             <option value="6">Samedi</option>
+            <option value="0">Dimanche</option>
         </select><br>
 
         <label for="hDebut"> Horaires : </label>
-        <p>De <input type="text" id="hDebut" name="hDebut" maxlength="2" style="width: 50px;" class="horaire"> h à <input type="text" id="hFin" name="hFin" maxlength="2" style="width: 50px;" class="horaire"> h</p>
+        <p>De <input type="text" id="hDebut" name="hDebut" maxlength="2" style="width: 50px;" class="horaire"> : <input type="text" id="minDebut" name="minDebut" maxlength="2" style="width: 50px;" class="horaire"><br>  à <input type="text" id="hFin" name="hFin" maxlength="2" style="width: 50px;" class="horaire"> : <input type="text" id="minFin" name="minFin" maxlength="2" style="width: 50px;" class="horaire"></p>
 
         <label for="lieu">Lieu :</label><br>
         <input type="text" id="lieu" name="lieu" maxlength="60"><br>
@@ -54,8 +55,8 @@ include '../bdd/fonctionsBDD.php';
 <?php
 if (isset($_POST['day']) && isset($_POST['hDebut']) && isset($_POST['hFin']) && isset($_POST['lieu']) && isset($_POST['actSelect']) && isset($_POST['animSelect']) && isset($_POST['lvl'])) {
     $day = $_POST['day'];
-    $hDebut = $_POST['hDebut'];
-    $hFin = $_POST['hFin'];
+    $hDebut = $_POST['hDebut'].':'.$_POST['minDebut'];
+    $hFin = $_POST['hFin'].':'.$_POST['minFin'];
     $addresse = $_POST['lieu'];
     $activite = $_POST['actSelect'];
     $animateur = $_POST['animSelect'];

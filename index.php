@@ -19,7 +19,7 @@
 
     <div class="index subpart">
 
-        <h2>Actualitée</h2>
+        <h2>Actualité</h2>
         <div class="fb-page" data-href="https://www.facebook.com/artanimeleers" data-tabs="timeline" data-width="555" data-height="700px" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/artanimeleers" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/artanimeleers">Artanime Leers</a></blockquote></div>
     </div>
 </div>

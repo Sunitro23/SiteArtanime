@@ -16,13 +16,15 @@
 
     <header class="responsive_headline">
 
-        <?php echo '<link href="' . SCRIPT_ROOT . '/css/css.css" rel="stylesheet">'; ?>
-
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+        <script src="https://kit.fontawesome.com/67969b0cca.js" crossorigin="anonymous"></script>
 
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css'>
 
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>        
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>  
+        
+        <?php echo '<link href="' . SCRIPT_ROOT . '/css/css.css" rel="stylesheet">'; ?>
 
         <div class="menu">
 

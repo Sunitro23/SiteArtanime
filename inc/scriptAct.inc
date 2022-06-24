@@ -21,7 +21,6 @@
             }
             ,
             initialView: 'timeGridWeek',
-            hiddenDays: [0],
             headerToolbar: {
                 left: 'prev',
                 center: 'title',
@@ -32,6 +31,14 @@
                 minute: '2-digit',
                 hour12: false
             },
+            firstDay: 1,
+            contentHeight: 'auto',
+            slotDuration: '1:00',
+            slotMaxTime: "24:00:00",
+            slotMinTime: "06:00:00",
+            locale: 'fr',
+            allDaySlot: false,
+            displayEventTime: false,
             events: [
 
 <?php
@@ -42,8 +49,8 @@ foreach ($LesCours as $UnCours) {
                 groupId: '" . $UnCours['idActivites'] . "',
                 title: '" . $UnCours['titre'] . "',
                 daysOfWeek: ['" . $UnCours['jour'] . "'],
-                startTime: '" . $UnCours['heureDebut'] . ":00',
-                endTime: '" . $UnCours['heureFin'] . ":00',
+                startTime: '" . $UnCours['heureDebut'] . "',
+                endTime: '" . $UnCours['heureFin'] . "',
                 backgroundColor:'" . $UnCours['color'] . "'},";
 }
 ?>
@@ -51,12 +58,5 @@ foreach ($LesCours as $UnCours) {
             ]
         });
         calendar.render();
-        calendar.setOption("slotMaxTime", "22:00:00");
-        calendar.setOption("slotMinTime", "08:00:00");
-        calendar.setOption("locale", "fr");
-        calendar.setOption('contentHeight', 'auto');
-        calendar.setOption('slotDuration', '1:00');
-        calendar.setOption('allDaySlot', false);
-        calendar.setOption('displayEventTime', false);
     });
 </script>

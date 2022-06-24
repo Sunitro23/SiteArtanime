@@ -11,8 +11,7 @@
         <input id="date" name="date" type="date"><br>
 
         <label for="horaires"> Horaires : </label><br>
-        <p>De <input type="text" id="horaireH" name="horaireH" maxlength="2" style="width: 50px;" class="horaire"> h à <input type="text" id="horaireM" name="horaireM" maxlength="2" style="width: 50px;" class="horaire"> h</p>
-
+        <p>De <input type="text" id="hDebut" name="hDebut" maxlength="2" style="width: 50px;" class="horaire"> : <input type="text" id="minDebut" name="minDebut" maxlength="2" style="width: 50px;" class="horaire"><br>  à <input type="text" id="hFin" name="hFin" maxlength="2" style="width: 50px;" class="horaire"> : <input type="text" id="minFin" name="minFin" maxlength="2" style="width: 50px;" class="horaire"></p>
         <label for="addresse"> Addresse : </label><br>
         <input type="addresse" id="addresse" name="addresse" maxlength="60"><br>
 
@@ -41,11 +40,11 @@
 <?php
 include_once '../bdd/fonctionsBDD.php';
 
-if (isset($_POST['titre']) && isset($_POST['date']) && isset($_POST['horaireH']) && isset($_POST['addresse']) && isset($_POST['description']) && isset($_FILES['fichier'])) {
+if (isset($_POST['titre']) && isset($_POST['date']) && isset($_POST['hDebut']) && isset($_POST['hFin']) && isset($_POST['addresse']) && isset($_POST['description']) && isset($_FILES['fichier'])) {
 
     try {
 
-        if (empty($_POST['titre']) || empty($_POST['date']) || empty($_POST['horaireH']) || empty($_POST['addresse']) || empty($_POST['description'])) {
+        if (empty($_POST['titre']) || empty($_POST['date']) || empty($_POST['hDebut']) || empty($_POST['addresse']) || empty($_POST['description'])) {
 
             throw new RuntimeException('Veuillez remplir toutes les valeurs.');
         } else {
@@ -75,7 +74,7 @@ if (isset($_POST['titre']) && isset($_POST['date']) && isset($_POST['horaireH'])
                         'jpg' => 'image/jpeg',
                         'png' => 'image/png',
                         'gif' => 'image/gif',
-                        'webp'=> 'image/webp',
+                        'webp' => 'image/webp',
                     ),
                     true
                     )) {
@@ -89,13 +88,21 @@ if (isset($_POST['titre']) && isset($_POST['date']) && isset($_POST['horaireH'])
 
 //Ajout BDD
 
+            if (isset($_POST['minDebut'])) {
+                $minDebut = $_POST['minDebut'];
+            } else {
+                $minDebut = '00';
+            }
+            if (isset($_POST['minFin'])) {
+                $minFin = $_POST['minFin'];
+            } else {
+                $minFin = '00';
+            }
             $titre = $_POST['titre'];
             $date = $_POST['date'];
-            if ($_POST['horaireM'] == null) {
-                $horaires = 'à partir de ' . $_POST['horaireH'] . 'h';
-            } else {
-                $horaires = $_POST['horaireH'] . 'h à ' . $_POST['horaireM'] . 'h';
-            }
+            $hDebut = $_POST['hDebut'] . ':' . $minDebut;
+            $hFin = $_POST['hFin'] . ':' . $minFin;
+            $horaires = $hDebut . ' à ' . $hFin;
             $addresse = $_POST['addresse'];
             $description = $_POST['description'];
             addEvent($titre, $date, $horaires, $addresse, $description, $filename);

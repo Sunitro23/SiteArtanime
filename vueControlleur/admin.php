@@ -8,7 +8,8 @@ if (isset($_SESSION['login'])) {
     <a href="ajoutAnim.php">Ajouter un animateur</a><br>
     <a href="ajoutEvenement.php">Ajouter un évenement</a><br>
     <a href="ajoutCA.php">Ajouter un membre du CA</a><br>
-    <a href="ajoutCours.php">Ajouter un cours</a></p><br>
+    <a href="ajoutCours.php">Ajouter un cours</a><br>
+    <a href="delCours.php">Supprimer un cours</a></p><br>
     </div>';
 }
 include_once '../inc/footer.inc';

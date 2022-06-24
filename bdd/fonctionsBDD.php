@@ -164,6 +164,28 @@ function getDetailCours($id) {
     return $UnCours;
 }
 
+function getDay($jour) {
+    switch ($jour) {
+        case 0: $day = 'dimanche';
+            break;
+        case 1: $day = 'lundi';
+            break;
+        case 2: $day = 'mardi';
+            break;
+        case 3: $day = 'mercredi';
+            break;
+        case 4: $day = 'jeudi';
+            break;
+        case 5: $day = 'vendredi';
+            break;
+        case 6: $day = 'samedi';
+            break;
+        default: echo "Erreur !";
+            break;
+    }
+    return $day;
+}
+
 //ALL ADD
 
 function addActivites($titre, $description, $filename, $color) {
@@ -418,6 +440,25 @@ function delCA($id) {
     if ($execute) {
         unset($_POST['delid']);
         echo '<script>if(!alert("Supprimé !")){window.location.href = window.location.href;}</script>';
+    } else {
+        echo '<script>alert("Erreur Interne.");</script>';
+    }
+}
+
+function delCours($cours) {
+    //Connection
+    $connexion = connect();
+
+    //Requete
+    $requete = "DELETE FROM cours WHERE idCours = :id ;";
+
+    //Remove Cours
+    $query = $connexion->prepare($requete);
+    $query->bindValue(':id', $cours, PDO::PARAM_INT);
+    $execute = $query->execute();
+    
+    if ($execute) {
+        echo '<script>alert("Supprimé !")</script>';
     } else {
         echo '<script>alert("Erreur Interne.");</script>';
     }

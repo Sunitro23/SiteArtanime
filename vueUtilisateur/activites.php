@@ -1,9 +1,10 @@
+
 <?php
 include_once '../inc/header.inc';
 include_once '../bdd/fonctionsBDD.php';
 ?>
 
-<div class='subpart'><h2>Quels sont nos activités ?</h2></div><br>
+<div class='subpart'><h2>Quelles sont nos activités ?</h2></div><br>
 
 <div class="subpart" id="activites-flex">
     <?php
@@ -93,17 +94,15 @@ include_once '../bdd/fonctionsBDD.php';
             
             <h1><ins>' . $UnCours['titre'] . '</ins></h1>
                 
-            <div id="act-calendar">
+            <div id="act-calendar" style="display:flex;justify-content:center;">
             
-            <div style="width: calc(100% - 250px);display:inline;">
-                <p style="margin:0">Quand ?</p>
-                <p>De ' . $UnCours['heureDebut'] . 'h à ' . $UnCours['heureFin'] . 'h</p>
-                <p>Où ? </p>
-                <p>' . $UnCours['addresse'] . '</p>
-                <p>Niveau : ' . $UnCours['niveau'] . '</p>
+            <div style="width: auto;display:inline;padding-right:100px;">
+                <h3>De ' . $UnCours['heureDebut'] . ' à ' . $UnCours['heureFin'] . '</h3>
+                <h3>' . $UnCours['addresse'] . '</h3>
+                <h3>Niveau : ' . $UnCours['niveau'] . '</h3>
             </div>
             
-            <div class="container-photo" style="display: block;width: 250px;">
+            <div class="container-photo" style="display: block;">
                 <h3 style="margin:0;">Avec :</h3>
                 <div class = "subpart transparent-container activite-container" style = "height:150px;width:150px;box-shadow:none;">
 
@@ -127,9 +126,3 @@ include_once '../bdd/fonctionsBDD.php';
 <div class="subpart">
     <div id='calendar'></div>
 </div><br><br>
-
-<script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
-</script>

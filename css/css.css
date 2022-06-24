@@ -113,7 +113,7 @@ body {
     overflow-y:scroll;
     overflow-x:hidden;
     word-wrap: break-word;
-    
+
 }
 
 .container{
@@ -129,7 +129,13 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
+}
+#adhesion-flex{
+    overflow:hidden;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 #event-flex{
     align-items: center;
@@ -167,6 +173,10 @@ body {
     background-color: var(--bg-accent);
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
+.container-adhesion{
+    display: flex;
+    flex-direction: row;
+}
 .event-container{
     overflow: hidden;
     height: 50%;
@@ -182,6 +192,15 @@ body {
 
 
 /*ALIGNEMENT*/
+#CA{
+    height:200px;
+    width:200px;
+    margin-left:auto;
+    margin-right:auto;
+    position:relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
 .logo{
     width: 385px;
     height: 154px;
@@ -194,6 +213,11 @@ body {
 .container-photo{
     display: inline-block;
     vertical-align:top;
+}
+.container-footer{
+    justify-content:center;
+    align-items: center;
+    display: flex;
 }
 
 .right{
@@ -208,7 +232,9 @@ body {
     margin:0;
     margin-top:10px;
 }
-
+#calendar{
+    height: auto;
+}
 #index-container{
     padding:0;
     display: flex;
@@ -301,10 +327,11 @@ nav a.current:hover {
 }
 
 footer {
+    background:var(--accent-bg);
     margin-top: 4rem;
     padding: 2rem 1rem 1.5rem 1rem;
     color: var(--text-light);
-    font-size: 0.9rem;
+    font-size: 1.4rem;
     text-align: center;
     border-top: 1px solid var(--border);
 }
@@ -642,6 +669,12 @@ li a:hover {
     cursor: pointer;
     border-radius: 50px;
 }
+#CA-container{
+    width:calc(50% - 10px);
+    height:auto;
+    margin:0;
+    padding-bottom:15px;
+}
 
 /*FORMULAIRE*/
 .horaire{
@@ -691,11 +724,28 @@ li a:hover {
         max-width:100%;
         width: 100%;
     }
+    .container-footer{
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .container-adhesion{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #CA-container{
+        margin-left:auto;
+        margin-right:auto;
+        display: block;
+        padding-top:15px;
+    }
+
 }
 
 .fc-event{
     cursor: pointer;
 }
-.fc-event-title{
-    mix-blend-mode:difference !important;
+.fc-event-main{
+    mix-blend-mode:exclusion;
 }
